@@ -22,12 +22,6 @@
       "params": {
         
       }
-    },
-    {
-      "type": "Dropout",
-      "params": {
-        
-      }
     }
   ]
 }
