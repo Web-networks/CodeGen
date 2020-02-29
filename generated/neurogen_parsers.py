@@ -5,7 +5,6 @@ class Id(neurogen.GeneratedClassBase):
 
 class Model(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Model()
         self.model_id = Id(obj["model_id"])
         self.user_id = Id(obj["user_id"])
         self.layers = []
@@ -16,42 +15,36 @@ class Model(neurogen.GeneratedClassBase):
 
 class Layer(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Layer()
         self.type = obj["type"]
         self.params = obj["params"]
 
 
 class Activation(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Activation()
         self.type = obj["type"]
         self.params = obj["params"]
 
 
 class Initializer(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Initializer()
         self.type = obj["type"]
         self.params = obj["params"]
 
 
 class Constraint(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Constraint()
         self.type = obj["type"]
         self.params = obj["params"]
 
 
 class Regularizer(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Regularizer()
         self.l1 = obj["l1"]
         self.l2 = obj["l2"]
 
 
 class DenseParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = DenseParams()
         self.units = obj["units"]
         self.activation = Activation(obj["activation"])
         self.use_bias = obj["use_bias"]
@@ -66,13 +59,11 @@ class DenseParams(neurogen.GeneratedClassBase):
 
 class ActivationParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = ActivationParams()
         self.activation = Activation(obj["activation"])
 
 
 class DropoutParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = DropoutParams()
         self.rate = obj["rate"]
         self.noise_shape = obj["noise_shape"]
         self.seed = obj["seed"]
@@ -80,7 +71,6 @@ class DropoutParams(neurogen.GeneratedClassBase):
 
 class Conv1DParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Conv1DParams()
         self.filters = obj["filters"]
         self.kernel_size = obj["kernel_size"]
         self.strides = obj["strides"]
@@ -100,7 +90,6 @@ class Conv1DParams(neurogen.GeneratedClassBase):
 
 class Conv2DParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Conv2DParams()
         self.filters = obj["filters"]
         self.kernel_size = obj["kernel_size"]
         self.strides = []
@@ -128,7 +117,6 @@ class Conv2DParams(neurogen.GeneratedClassBase):
 
 class Pooling1DParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Pooling1DParams()
         self.pool_size = obj["pool_size"]
         self.strides = obj["strides"]
         self.padding = obj["padding"]
@@ -137,7 +125,6 @@ class Pooling1DParams(neurogen.GeneratedClassBase):
 
 class Pooling2DParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = Pooling2DParams()
         self.pool_size = []
         for item in obj["pool_size"]:
             parsed_item = item
@@ -154,7 +141,6 @@ class Pooling2DParams(neurogen.GeneratedClassBase):
 
 class SimpleRNNParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = SimpleRNNParams()
         self.units = obj["units"]
         self.activation = Activation(obj["activation"])
         self.use_bias = obj["use_bias"]
@@ -179,7 +165,6 @@ class SimpleRNNParams(neurogen.GeneratedClassBase):
 
 class LSTMParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = LSTMParams()
         self.units = obj["units"]
         self.activation = Activation(obj["activation"])
         self.recurrent_activation = Activation(obj["recurrent_activation"])
@@ -207,7 +192,6 @@ class LSTMParams(neurogen.GeneratedClassBase):
 
 class EmbeddingParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = EmbeddingParams()
         self.input_dim = obj["input_dim"]
         self.output_dim = obj["output_dim"]
         self.embeddings_initializer = Initializer(obj["embeddings_initializer"])
@@ -220,7 +204,6 @@ class EmbeddingParams(neurogen.GeneratedClassBase):
 
 class BatchNormalizationParams(neurogen.GeneratedClassBase):
     def __init__(self, obj):
-        self = BatchNormalizationParams()
         self.axis = obj["axis"]
         self.momentum = obj["momentum"]
         self.epsilion = obj["epsilion"]

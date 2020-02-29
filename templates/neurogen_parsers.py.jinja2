@@ -11,7 +11,9 @@
         {% if properties is none %}
           | {{target}} = {{source}}
         {% else %}
-          | {{target}} = {{name}}()
+          {% if target != 'self' %}
+            | {{target}} = {{name}}()
+          {% endif %}
           {% for (field_name, field_schema) in properties.items(): %}
             {% set field_source = source + '["' + field_name + '"]' %}
             | {{ gen_parse_field_snippet(
