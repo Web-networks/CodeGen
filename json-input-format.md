@@ -24,6 +24,9 @@
       }
     }
   ]
+  "loss": "string",
+  "optimizer": "string",
+  "metrics": "string"
 }
 ```
 # 1. Core Layers
@@ -446,5 +449,42 @@ Arguments
     }
   }
 ```
+# 7. Optimizers 
+For simplicity we take them with default parameters
+  * sgd
+  * RMSprop
+  * Adagrad
+  * Adadelta
+  * Adam
+  * Adamax
+  * Nadam
+
+# 8. Loss functions
+  * mean_squared_error
+  * mean_absolute_error
+  * mean_absolute_percentage_error
+  * mean_squared_logarithmic_error
+  * squared_hinge
+  * hinge
+  * categorical_hinge
+  * logcosh
+  * huber_loss
+  * categorical_crossentropy
+  * sparse_categorical_crossentropy
+  * binary_crossentropy
+  * kullback_leebler_divergence
+  * poisson
+  * cosine_proximity
+  * is_categorical_crossentropy
+
+# 9. Metrics
+  * accuracy
+  * binary_accuracy
+  * categorical_accuracy
+  * sparse_categorical_accuracy
+  * top_k_categorical_accuracy
+  * sparse_top_k_categorical_accuracy
+  * cosine_proximity
+  * clone_metrics
 
 
