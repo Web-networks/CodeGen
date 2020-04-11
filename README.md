@@ -8,9 +8,6 @@ virtualenv -p python3 venv
 . venv/bin/activate
 pip install -r requirements.txt
 
-# Take yaml from schemas repo
-cp ../schemas/definitions.yaml .
-
 # Running parsers codegen
 python3 gen_parsers.py > generated/neurogen_parsers.py
 

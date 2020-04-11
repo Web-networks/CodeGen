@@ -1,7 +1,7 @@
 import jinja2py
 import yaml
 
-schemas = yaml.safe_load(open('definitions.yaml'))['components']['schemas']
+schemas = yaml.safe_load(open('schemas/models.yaml'))['components']['schemas']
 
 tpl = jinja2py.get_template('neurogen_parsers.py.jinja2')
 
