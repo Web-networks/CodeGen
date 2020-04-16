@@ -1,0 +1,13 @@
+{
+  "model_id": "1",
+  "user_id": "1",
+  "layers": [
+    {
+      "type": "Dense",
+      "params": {
+        "units": 64,
+        "activation": "relu"
+      }
+    }
+  ]
+} 
