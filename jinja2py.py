@@ -1,4 +1,5 @@
 import re
+import sys
 
 import jinja2
 from jinja2.loaders import FileSystemLoader
@@ -19,7 +20,7 @@ def _get_line_with_indent_change(line, prev_indent):
   regexp = r'^([\s<>|]*)(.*)$'
   indent_markers, payload = re.match(regexp, line).groups()
 
-  next_indent = None
+  next_indent: int = None
 
   if indent_markers.count('<'):
     next_indent = prev_indent + 1
@@ -36,10 +37,24 @@ def _get_line_with_indent_change(line, prev_indent):
 
 
 def render_with_indents(template, **kwargs):
+  filename = None
+  if isinstance(template, str):
+    filename = template
+    template = get_template(template)
   rendered_text = template.render(**kwargs)
   indent = 0
   result = ''
-  for line in rendered_text.split('\n'):
+  for i, line in enumerate(rendered_text.split('\n')):
     indent, proc_line = _get_line_with_indent_change(line, indent)
+    if indent < 0:
+      print('Error preparing rendered text:', file=sys.stderr)
+      print(rendered_text, file=sys.stderr)
+      print('At line', i + 1, file=sys.stderr)
+      assert False
     result += proc_line
+  if indent != 0:
+    print('Error preparing rendered text:', file=sys.stderr)
+    print(rendered_text, file=sys.stderr)
+    print('At (last) line', i + 1, file=sys.stderr)
+    assert False
   return result
