@@ -1,0 +1,503 @@
+openapi: '3.0.0'
+
+components:
+  schemas:
+    Id:
+      type: string
+      description: mongodb(?) id of something
+      
+    Optimizer:
+      type: string
+      enum: 
+        - sgd
+        - RMSprop
+        - Adagrad
+        - Adadelta
+        - Adam
+        - Adamax
+        - Nadam
+      
+    Loss:
+      type: string
+      enum:
+        - mean_squared_error
+        - mean_absolute_error
+        - mean_absolute_percentage_error
+        - mean_squared_logarithmic_error
+        - squared_hinge
+        - hinge
+        - categorical_hinge
+        - logcosh
+        - huber_loss
+        - categorical_crossentropy
+        - sparse_categorical_crossentropy
+        - binary_crossentropy
+        - kullback_leebler_divergence
+        - poisson
+        - cosine_proximity
+        - is_categorical_crossentropy
+      
+    Metrics:
+      type: string
+      enum:
+        - accuracy
+        - binary_accuracy
+        - categorical_accuracy
+        - sparse_categorical_accuracy
+        - top_k_categorical_accuracy
+        - sparse_top_k_categorical_accuracy
+        - cosine_proximity
+        - clone_metrics
+      
+    # High-level objects
+    Model:
+      type: object
+      properties:
+        model_id:
+          $ref: '#/components/schemas/Id'
+        user_id:
+          $ref: '#/components/schemas/Id'
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Layer'
+        optimizer:
+          $ref: '#/components/schemas/Optimizer'
+        loss:
+          $ref: '#/components/schemas/Loss'
+        metrics:
+          $ref: '#/components/schemas/Metrics'
+        
+      required:
+      - model_id
+      - user_id
+      - layers
+      - optimizer
+      - loss
+      - metrics
+          
+    Layer:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Layer type
+          enum:
+          - Dense
+          - Activation
+          - Dropout
+          - Conv1D
+          - Conv2D
+          - MaxPooling1D
+          - MaxPooling2D
+          - AveragePooling1D
+          - AveragePooling2D
+          - SimpleRNN
+          - LSTM
+          - Embedding
+          - BatchNormalization
+        params:
+          type: object
+          description: Layer properties
+
+    Activation:
+      type: object
+      description: Activation function. See https://keras.io/activations/
+      properties:
+        type:
+          type: string
+          enum:
+          - elu
+          - softmax
+          - selu
+          - softplus
+          - softsign
+          - relu
+          - tanh
+          - sigmoid
+          - hard_sigmoid
+          - exponential
+          - linear
+        params:
+          type: object
+          default: {}
+      required:
+      - type
+
+    Initializer:
+      type: object
+      description: Initializer. See https://keras.io/initializers/
+      properties:
+        type:
+          type: string
+          enum:
+          - Zeros
+          - Ones
+          - Constant
+          - RandomNormal
+          - RandomUniform
+          - TruncatedNormal
+          - VarianceScaling
+          - Orthogonal
+          - Identity
+          - lecun_uniform
+          - glorot_normal
+          - glorot_uniform
+          - he_normal
+          - lecun_normal
+          - he_uniform
+        params:
+          type: object
+          default: {}
+      required:
+      - type
+
+    Constraint:
+      type: object
+      description: https://keras.io/constraints/
+      properties:
+        type:
+          type: string
+          enum:
+          - MaxNorm
+          - NonNeg
+          - UnitNorm
+          - MinMaxNorm
+        params:
+          type: object
+          default: {}
+      required:
+      - type
+
+    Regularizer:
+      type: object
+      description: |
+        https://keras.io/regularizers/
+        l1 и l2 можно одновременно(?)
+      properties:
+        l1:
+          type: number
+        l2:
+          type: number
+
+    # "params" for different layer types
+    DenseParams:
+      type: object
+      properties:
+        units:
+          type: integer
+        activation:
+          $ref: '#/components/schemas/Activation'
+        use_bias:
+          type: boolean
+        kernel_initializer:
+          $ref: '#/components/schemas/Initializer'
+        bias_initializer:
+          $ref: '#/components/schemas/Initializer'
+        kernel_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        bias_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        kernel_constraint:
+          $ref: '#/components/schemas/Constraint'
+        bias_constraint:
+          $ref: '#/components/schemas/Constraint'
+    
+    ActivationParams:
+      type: object
+      properties:
+        activation:
+          $ref: '#/components/schemas/Activation'
+    
+    DropoutParams:
+      type: object
+      properties:
+        rate:
+          type: number
+          format: float
+        noise_shape:
+          type: integer
+        seed:
+          type: integer
+
+    Conv1DParams:
+      type: object
+      properties:
+        filters:
+          type: integer
+        kernel_size:
+          type: integer
+        strides:
+          type: integer
+        padding:
+          type: string
+          enum:
+          - valid
+          - casual
+          - same
+        data_format:
+          type: string
+          enum:
+          - channels_first
+          - channels_last
+        dilation_rate:
+          type: integer
+        activation:
+          $ref: '#/components/schemas/Activation'
+        use_bias:
+          type: boolean
+        kernel_initializer:
+          $ref: '#/components/schemas/Initializer'
+        bias_initializer:
+          $ref: '#/components/schemas/Initializer'
+        kernel_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        bias_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        kernel_constraint:
+          $ref: '#/components/schemas/Constraint'
+        bias_constraint:
+          $ref: '#/components/schemas/Constraint'
+
+    # Some params here become arrays of 2
+    Conv2DParams:
+      type: object
+      properties:
+        filters:
+          type: integer
+        kernel_size:
+          type: integer
+        strides:
+          type: array
+        padding:
+          type: string
+          enum:
+          - valid
+          - same
+        data_format:
+          type: string
+          enum:
+          - channels_first
+          - channels_last
+        dilation_rate:
+          type: array
+        activation:
+          $ref: '#/components/schemas/Activation'
+        use_bias:
+          type: boolean
+        kernel_initializer:
+          $ref: '#/components/schemas/Initializer'
+        bias_initializer:
+          $ref: '#/components/schemas/Initializer'
+        kernel_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        bias_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regulizer:
+          $ref: '#/components/schemas/Regularizer'
+        kernel_constraint:
+          $ref: '#/components/schemas/Constraint'
+        bias_constraint:
+          $ref: '#/components/schemas/Constraint'
+    
+    Pooling1DParams:
+      type: object
+      properties:
+        pool_size: 
+          type: integer
+        strides: 
+          type: integer
+        padding:
+          type: string
+          enum:
+          - valid
+          - same
+          default: valid
+        data_format: 
+          type: string
+          enum:
+          - channels_first
+          - channels_last
+          default: channels_last
+    
+    # Some params are now 2D
+    Pooling2DParams:
+      type: object
+      properties:
+        pool_size: 
+          type: array
+          items:
+            type: integer
+        strides: 
+          type: array
+          items:
+            type: integer
+        padding:
+          type: string
+          enum:
+          - valid
+          - same
+          default: valid
+        data_format: 
+          type: string
+          enum:
+          - channels_first
+          - channels_last
+          default: channels_last
+    
+    SimpleRNNParams:
+      type: object
+      properties:
+        units:
+          type: integer
+        activation:
+          $ref: '#/components/schemas/Activation'
+        use_bias:
+          type: boolean
+        kernel_initializer:
+          $ref: '#/components/schemas/Initializer'
+        recurrent_initializer:
+          $ref: '#/components/schemas/Initializer'
+        bias_initializer:
+          $ref: '#/components/schemas/Initializer'
+        kernel_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        recurrent_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        bias_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        kernel_constraint:
+          $ref: '#/components/schemas/Constraint'
+        recurrent_constraint:
+          $ref: '#/components/schemas/Constraint'
+        bias_constraint:
+          $ref: '#/components/schemas/Constraint'
+        dropout:
+          type: number
+          format: float
+        recurrent_dropout:
+          type: number
+          format: float
+        return_sequences:
+          type: boolean
+        return_state:
+          type: boolean
+        go_backwards:
+          type: boolean
+        stateful:
+          type: boolean
+        unroll:
+          type: boolean
+    
+    LSTMParams:
+      type: object
+      properties:
+        units:
+          type: integer
+        activation:
+          $ref: '#/components/schemas/Activation'
+        recurrent_activation:
+          $ref: '#/components/schemas/Activation'
+        use_bias:
+          type: boolean
+        kernel_initializer:
+          $ref: '#/components/schemas/Initializer'
+        recurrent_initializer:
+          $ref: '#/components/schemas/Initializer'
+        bias_initializer:
+          $ref: '#/components/schemas/Initializer'
+        unit_forget_bias:
+          type: boolean
+        kernel_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        recurrent_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        bias_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        kernel_constraint:
+          $ref: '#/components/schemas/Constraint'
+        recurrent_constraint:
+          $ref: '#/components/schemas/Constraint'
+        bias_constraint:
+          $ref: '#/components/schemas/Constraint'
+        dropout:
+          type: number
+          format: float
+        recurrent_dropout:
+          type: number
+          format: float
+        implementation:
+          type: integer
+          enum:
+          - 1
+          - 2
+        return_sequences:
+          type: boolean
+        return_state:
+          type: boolean
+        go_backwards:
+          type: boolean
+        stateful:
+          type: boolean
+        unroll:
+          type: boolean
+    
+    EmbeddingParams:
+      type: object
+      properties:
+        input_dim:
+          type: integer
+        output_dim:
+          type: integer
+        embeddings_initializer:
+          $ref: '#/components/schemas/Initializer'
+        embeddings_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        activity_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        embeddings_constraint:
+          $ref: '#/components/schemas/Constraint'
+        mask_zero:
+          type: boolean
+        input_length:
+          type: integer
+    
+    BatchNormalizationParams:
+      type: object
+      properties:
+        axis:
+          type: integer
+        momentum:
+          type: number
+          format: float
+        epsilion:
+          type: number
+          format: float
+        center:
+          type: boolean
+        scale:
+          type: boolean
+        beta_initializer:
+          $ref: '#/components/schemas/Initializer'
+        gamma_initializer:
+          $ref: '#/components/schemas/Initializer'
+        moving_mean_initializer:
+          $ref: '#/components/schemas/Initializer'
+        moving_variance_initializer:
+          $ref: '#/components/schemas/Initializer'
+        beta_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        gamma_regularizer:
+          $ref: '#/components/schemas/Regularizer'
+        beta_constraint:
+          $ref: '#/components/schemas/Constraint'
+        gamma_constraint:
+          $ref: '#/components/schemas/Constraint'
