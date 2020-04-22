@@ -8,6 +8,25 @@
         "units": 64,
         "activation": "relu"
       }
+    },
+    {
+      "type": "Dropout",
+      "params": {}
+    },
+    {
+      "type": "Dense",
+      "params": {
+        "units": 64,
+        "activation": "relu"
+      }
     }
-  ]
+  ],
+  "input": {
+    "type": "builtin_dataset",
+    "dataset": "mnist"
+  },
+  "output": {
+    "type": "integer",
+    "range": [0, 10]
+  }
 } 
