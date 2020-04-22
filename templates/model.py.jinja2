@@ -6,8 +6,10 @@
 
 | import keras
 |
-| model = Sequential()
-
+| def init_model():
+< model = Sequential()
 {% for layer in model.layers %}
   | model.add( {{layer.type}}( {{render_params(layer.params)}} ))
 {% endfor %}
+ | return model
+ >
