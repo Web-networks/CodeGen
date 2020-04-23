@@ -2,8 +2,7 @@ from model import init_model
 
 
 class TrainController:
-    def __init__(self, model_json, model):
-        self.model_json = model_json
+    def __init__(self):
         self.model = init_model()
 
     def do_epoch(self):

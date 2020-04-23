@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report
 
 bus = ng_bus.NeurogenBus('train')
 io = ng_input.NeurogenIO(bus)
-train = train.TrainController(bus)
+train = train.TrainController()
 
 cli_vars = []
 cli_vars += io.get_vars()
