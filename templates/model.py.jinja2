@@ -5,7 +5,10 @@
 {% endmacro %}
 
 | from keras.models import Sequential
-| from keras.layers.core import Dense
+{# TODO: deal with repeated imports #}
+{% for layer in model.layers %}
+| from keras.layers.core import {{ layer.type }}
+{% endfor %}
 |
 | def init_model():
 < model = Sequential()

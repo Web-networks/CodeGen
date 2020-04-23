@@ -13,19 +13,20 @@ io = ng_input.NeurogenIO(bus)
 train = train.TrainController(bus)
 
 cli_vars = []
-cli_vars += ng_io.get_vars()
+cli_vars += io.get_vars()
 cli_vars += train.get_vars()
 
 parser = argparse.ArgumentParser()
 
-for cli_var in cli_vars:
-  parser.add_argument('--' + cli_var)
+# не работает пока что
+# for cli_var in cli_vars:
+  # parser.add_argument('--' + cli_var)
 
-print('args:', parser.parse_args(sys.argv))
+# print('args:', parser.parse_args(sys.argv))
 
-ng_io.read_inputs()
-X_train, y_train = ng_io.get_train_xy()
-X_test, y_test = ng_io.get_test_xy()
+io.read_inputs()
+X_train, y_train = io.get_train_xy()
+X_test, y_test = io.get_test_xy()
 
 # надо бы как-то чтобы пробрасывалось компонентно число эпох
 # пока количество эпох чисто захардкожено
