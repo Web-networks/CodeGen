@@ -11,8 +11,8 @@ def get_jinjaEnv():
                           extensions=['jinja2.ext.do'])
     return jenv
 
-def get_template(name):
-  return get_jinjaEnv.get_template(name)
+def get_template(jenv, name):
+  return jenv.get_template(name)
 
 
 INDENT = ' '
