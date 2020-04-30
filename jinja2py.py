@@ -4,13 +4,15 @@ import sys
 import jinja2
 from jinja2.loaders import FileSystemLoader
 
-jenv = jinja2.Environment(loader=FileSystemLoader('templates'),
+def get_jinjaEnv():  
+    jenv = jinja2.Environment(loader=FileSystemLoader('templates'),
                           trim_blocks=True, 
                           lstrip_blocks=True,
                           extensions=['jinja2.ext.do'])
+    return jenv
 
 def get_template(name):
-  return jenv.get_template(name)
+  return get_jinjaEnv.get_template(name)
 
 
 INDENT = ' '
