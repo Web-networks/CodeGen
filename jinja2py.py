@@ -4,14 +4,12 @@ import sys
 import jinja2
 from jinja2.loaders import FileSystemLoader
 
-def get_jinjaEnv():  
-    jenv = jinja2.Environment(loader=FileSystemLoader('templates'),
+jenv = jinja2.Environment(loader=FileSystemLoader('templates'),
                           trim_blocks=True, 
                           lstrip_blocks=True,
                           extensions=['jinja2.ext.do'])
-    return jenv
 
-def get_template(jenv, name):
+def get_template(name):
   return jenv.get_template(name)
 
 
