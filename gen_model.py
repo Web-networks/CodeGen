@@ -19,5 +19,7 @@ def integration(model, template_name, output_dir):
         f.write(code)
         
 # Example how to run such function      
-model = json.load(open('sample/model.json'))
+model = json.load(open('sample/vgg.json'))
+integration(model, 'model', 'sample/generated/')
+integration(model, 'ng_input', 'sample/generated/')
 integration(model, 'train', 'sample/generated/')

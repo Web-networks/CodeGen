@@ -86,12 +86,13 @@ components:
           - Dense
           - Activation
           - Dropout
+          - Flatten
           - Conv1D
           - Conv2D
-          - MaxPooling1D
-          - MaxPooling2D
-          - AveragePooling1D
-          - AveragePooling2D
+          - MaxPool1D
+          - MaxPool2D
+          - AveragePool1D
+          - AveragePool2D
           - SimpleRNN
           - LSTM
           - Embedding
@@ -271,6 +272,8 @@ components:
           type: integer
         kernel_size:
           type: integer
+        input_shape:
+          type: array
         strides:
           type: array
         padding:
