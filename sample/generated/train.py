@@ -1,4 +1,6 @@
 from model import init_model
+from keras.callbacks import ModelCheckpoint
+import os
 
 
 class TrainController:
@@ -16,8 +18,20 @@ class TrainController:
             loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"]
         )
 
-    def do_train(self, X_train, y_train, X_test, y_test):
+    def do_train(self, X_train, y_train, X_test, y_test, weights_filename):
+        if not os.path.exists("weights"):
+            os.makedirs("weights")
+
+        weights_file = "weights/" + weights_filename + ".h5"
+        callback = ModelCheckpoint(
+            weights_file, monitor="acc", mode="max", save_best_only=True
+        )
         result_train = self.model.fit(
-            X_train, y_train, validation_data=(X_test, y_test), epochs=5, batch_size=32
+            X_train,
+            y_train,
+            validation_data=(X_test, y_test),
+            epochs=5,
+            batch_size=32,
+            callbacks=[callback],
         )
         return result_train

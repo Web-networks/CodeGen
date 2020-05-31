@@ -31,6 +31,6 @@ X_test, y_test = io.get_test_xy()
 # надо бы как-то чтобы пробрасывалось компонентно число эпох
 # пока количество эпох чисто захардкожено
 train.do_compile()
-result_of_train = train.do_train(X_train, y_train, X_test, y_test)
+result_of_train = train.do_train(X_train, y_train, X_test, y_test, 'vgg_weights')
 #оценка работы модели
 print (np.mean(result_of_train.history["val_acc"]))
