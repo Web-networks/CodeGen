@@ -32,14 +32,12 @@ X_test, y_test = io.get_test_xy()
 print(X_train.shape)
 
 
-# надо бы как-то чтобы пробрасывалось компонентно число эпох
-# пока количество эпох чисто захардкожено
 train.do_compile()
 
 train.print_sample_predictions(X_test, y_test)
-
-result_of_train = train.do_train(X_train, y_train, X_test, y_test, args.epochs)
-# оценка работы модели
+result_of_train = train.do_train(
+    X_train, y_train, X_test, y_test, args.epochs, "weights"
+)
 print(result_of_train.history)
 # print(np.mean(result_of_train.history["val_acc"]))
 
