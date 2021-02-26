@@ -1,7 +1,15 @@
 import json
+import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--case')
+args = parser.parse_args()
+
+case = args.case
 
 def read_input(filename):
-    with open('model.json') as json_file:
+    with open("models/{}/model.json".format(case)) as json_file:
         data = json.load(json_file)
         return data
 
@@ -40,6 +48,9 @@ l = create_list_imports(inp)
 imports = create_model_imports_file(inp, l)
 result = create_init_model_func(inp)
 to_file = imports + "\n" + result
-f = open('model.py', 'w')
-f.write(to_file)
-f.close()
+
+with open(f'models/{case}/generated-p/model.py', 'w') as f:
+    f.write(to_file)
+#f = open('../generated/model.py', 'w')
+#f.write(to_file)
+#f.close()
