@@ -4,7 +4,7 @@ import sys
 import jinja2
 from jinja2.loaders import FileSystemLoader
 
-jenv = jinja2.Environment(loader=FileSystemLoader('templates'),
+jenv = jinja2.Environment(loader=FileSystemLoader('/home/ekaterina/documents/diploma/CodeGen/jinja-gen/templates'),
                           trim_blocks=True, 
                           lstrip_blocks=True,
                           extensions=['jinja2.ext.do'])

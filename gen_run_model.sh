@@ -9,5 +9,6 @@ set -x
 CASE=sample_few_layers
 
 python3 jinja-gen/gen_model.py --case=$CASE
-cd jinja-gen/$CASE/generated
+echo $PWD
+cd models/$CASE/generated
 python3 cli.py "$@"
