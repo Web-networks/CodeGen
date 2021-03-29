@@ -1,0 +1,244 @@
+{
+  "model_id": "alexNet",
+  "user_id": "1",
+  "optimizer": "adam",
+  "loss": "categorical_crossentropy",
+  "metrics": "accuracy",
+  "layers": [
+
+    {
+      "type": "Conv2D",
+      "params": {
+        "input_shape": [32, 32, 3],
+        "filters": 96,
+        "kernel_size": [11, 11],
+        "padding": "same",
+        "strides": [4,4]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+        
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "MaxPooling2D",
+      "params": {
+        "pool_size": [2, 2],
+        "strides": [2, 2],
+        "padding": "same"
+      }
+    },
+    {
+      "type": "Conv2D",
+      "params": {
+        "filters": 256,
+        "kernel_size": [5, 5],
+        "padding": "same",
+        "strides": [1,1]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+        
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "MaxPooling2D",
+      "params": {
+        "pool_size": [2, 2],
+        "strides": [2, 2],
+        "padding": "same"
+      }
+    },
+    {
+      "type": "Conv2D",
+      "params": {
+        "filters": 384,
+        "kernel_size": [3, 3],
+        "padding": "same",
+        "strides": [1,1]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+        
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "Conv2D",
+      "params": {
+        "filters": 384,
+        "kernel_size": [3, 3],
+        "padding": "same",
+        "strides": [1,1]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+        
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "Conv2D",
+      "params": {
+        "filters": 256,
+        "kernel_size": [3, 3],
+        "padding": "same",
+        "strides": [1,1]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "MaxPooling2D",
+      "params": {
+        "pool_size": [2, 2],
+        "strides": [2, 2],
+        "padding": "same"
+      }
+    },
+    {
+      "type": "Flatten",
+      "params":{
+      }
+    },
+{
+      "type": "Dense",
+      "params": {
+        "units": 4096,
+        "input_shape": [32, 32, 3]
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "Dropout",
+      "params":{
+        "rate": 0.4
+      }
+    },
+    {
+      "type": "Dense",
+      "params": {
+        "units": 4096
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "Dropout",
+      "params":{
+        "rate": 0.4
+      }
+    },
+    {
+      "type": "Dense",
+      "params": {
+        "units": 1000
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "relu"
+      }
+    },
+    {
+      "type": "Dropout",
+      "params":{
+        "rate": 0.4
+      }
+    },
+    {
+      "type": "Dense",
+      "params": {
+        "units": 10
+      }
+    },
+    {
+      "type": "BatchNormalization",
+      "params":{
+
+      }
+    },
+    {
+      "type": "Activation",
+      "params":{
+        "activation": "softmax"
+      }
+    }
+  ],
+    "input": {
+    "type": "builtin_dataset",
+    "dataset": "mnist"
+  },
+  "output": {
+    "type": "integer",
+    "range": [0, 10]
+  }
+}
