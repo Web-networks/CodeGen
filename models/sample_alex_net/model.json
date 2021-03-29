@@ -232,3 +232,13 @@
         "activation": "softmax"
       }
     }
+  ],
+    "input": {
+    "type": "builtin_dataset",
+    "dataset": "mnist"
+  },
+  "output": {
+    "type": "integer",
+    "range": [0, 10]
+  }
+}

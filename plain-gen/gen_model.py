@@ -23,7 +23,7 @@ def create_list_imports(json_data):
 def create_model_imports_file(json_data, layers):
     output = "from tensorflow.keras.models import Sequential\n"
     for item in layers:
-        output = output + "from tensorflow.keras.models import {}\n".format(item)
+        output = output + "from tensorflow.keras.layers import {}\n".format(item)
     return output
 
 def create_init_model_func(json_data):
@@ -38,7 +38,7 @@ def create_init_model_func(json_data):
                     output = output + "{}=\"{}\",".format(key,value)
                 else:
                     output = output + "{}={},".format(key,value)
-            output = output + ")\n"
+            output = output + "))\n"
     output = output + "    return model"
     return output
 
