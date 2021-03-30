@@ -32,6 +32,7 @@ parser.add_argument('--case')
 args = parser.parse_args()
 
 case = args.case
+print(case)
 
 model = json.load(open(f'{case}/model.json'))
 

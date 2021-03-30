@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.models import Conv2D
-from tensorflow.keras.models import Dense
 from tensorflow.keras.models import Flatten
+from tensorflow.keras.models import Dense
 
 def init_model():
     model = Sequential()
