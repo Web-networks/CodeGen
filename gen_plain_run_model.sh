@@ -5,12 +5,10 @@
 set -e
 set -x
 
-#CASE=sample_vgg
-#CASE=sample_few_layers
-CASE=sample_alex_net
+CASE=$1
 
 python3 plain-gen/gen_model.py --case=$CASE
 python3 plain-gen/get_train.py --case=$CASE
 cp plain-gen/templates/* models/$CASE/generated-p
 cd models/$CASE/generated-p
-python3 cli.py "$@"
+python3 cli.py $2 $3 $4 $5

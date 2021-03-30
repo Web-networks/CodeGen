@@ -5,11 +5,9 @@
 set -e
 set -x
 
-#CASE=sample_vgg
-#CASE=sample_few_layers
-CASE=sample_alex_net
+CASE=$1
 
 python3 jinja-gen/gen_model.py --case=$CASE
 echo $PWD
 cd models/$CASE/generated
-python3 cli.py "$@"
+python3 cli.py $2 $3 $4 $5
