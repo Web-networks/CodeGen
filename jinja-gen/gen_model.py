@@ -6,6 +6,7 @@ import os
 import black
 
 import jinja2py
+from pathlib import Path
 
 
 def render_template(model, template_name):
@@ -32,14 +33,19 @@ parser.add_argument('--case')
 args = parser.parse_args()
 
 case = args.case
-print(case)
 
-model = json.load(open(f'{case}/model.json'))
+model = json.load(open(f'/home/ekaterina/documents/diploma/CodeGen/models/{case}/model.json'))
+print ("AAAA")
+print(model)
 
+print("File      Path:", Path(__file__).absolute())
+print("Directory Path:", Path().absolute()) # Directory of current working directory, not __file__  
 for module in ['model', 'ng_input', 'train', 'ng_bus', 'cli']:
-    naive_path = f'templates/{module}.py'
+    naive_path = f'/home/ekaterina/documents/diploma/CodeGen/jinja-gen/templates/{module}.py'
     if os.path.exists(naive_path):
+        print("FILE EXISTS")
         code = open(naive_path).read()
     else:
+        print("GENERATING")
         code = render_template(model, module)
-    format_and_write(module, code, f'{case}/generated/')
+    format_and_write(module, code, f'/home/ekaterina/documents/diploma/CodeGen/models/{case}/generated/')
