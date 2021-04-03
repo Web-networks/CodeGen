@@ -235,7 +235,7 @@
   ],
     "input": {
     "type": "builtin_dataset",
-    "dataset": "mnist"
+    "dataset": "cifar10"
   },
   "output": {
     "type": "integer",

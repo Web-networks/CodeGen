@@ -17,17 +17,24 @@ class NeurogenIO:
                 self.X_test,
                 self.y_test,
             ) = cifar10.load_data()
+            from sklearn.model_selection import train_test_split
+
+            self.X_train, self.x_val, self.y_train, self.y_val = train_test_split(
+                self.X_train, self.y_train, test_size=0.3
+            )
+            from sklearn.utils.multiclass import unique_labels
+            from keras.utils import to_categorical
+
+            self.y_train = to_categorical(self.y_train)
+            self.y_val = to_categorical(self.y_val)
+            self.y_test = to_categorical(self.y_test)
         else:
             raise Exception("invalid mode: " + self.ng_bus.mode)
 
     def get_train_xy(self):
-        self.X_train = self.X_train.reshape(self.X_train.shape[0], 28, 28, 1)
-        self.X_train = self.X_train.astype("float32")
-        self.X_train /= 255
+
         return self.X_train, self.y_train
 
     def get_test_xy(self):
-        self.X_test = self.X_test.reshape(self.X_test.shape[0], 28, 28, 1)
-        self.X_test = self.X_test.astype("float32")
-        self.X_test /= 255
+
         return self.X_test, self.y_test
