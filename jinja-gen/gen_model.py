@@ -35,11 +35,7 @@ args = parser.parse_args()
 case = args.case
 
 model = json.load(open(f'/home/ekaterina/documents/diploma/CodeGen/models/{case}/model.json'))
-print ("AAAA")
-print(model)
 
-print("File      Path:", Path(__file__).absolute())
-print("Directory Path:", Path().absolute()) # Directory of current working directory, not __file__  
 list_of_module = []
 if case == "sample_alex_net":
     list_of_module = ['model', 'ng_input_alex_net', 'train', 'ng_bus', 'cli-alex-net']
@@ -53,6 +49,7 @@ for module in list_of_module:
     naive_path = f'/home/ekaterina/documents/diploma/CodeGen/jinja-gen/templates/{module}.py'
     if os.path.exists(naive_path):
         print("FILE EXISTS")
+        print(naive_path)
         code = open(naive_path).read()
     else:
         print("GENERATING")

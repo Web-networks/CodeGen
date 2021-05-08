@@ -37,6 +37,7 @@ class TrainController:
             batch_size=32,
             callbacks=[callback],
         )
+        self.model.save("weights.h5")
         return result_train
 
     def print_sample_predictions(self, X_test, y_test):
